@@ -29,8 +29,6 @@ python parse.py
 ```
 
 To-Do:
-  >1. Add the KMZ into the script; user specifies 1 input and 1 output FC name
-  >2. Combine 3 scripts into 1, change hardcoded paths
-  >3. Turn this script into a Arc Desktop tool, paramatize the input and outputs
-  >4. Unittests: for missing data, for range out of bounds, for different user parameters
-  >5. Dynamicize the soup's findAll functions. It won't always be the same td elements we grab...I don't think.
+  >1. Unittests: for missing data, for range out of bounds, for different user parameters
+  >2. Dynamicize the soup's findAll functions. It won't always be the same td elements we grab...I don't think.
+  >3. Either require a gdb to work in, create one then delete it, or use some dynamic scratch workspace so the user doesn't need to a hard-coded out gdb.

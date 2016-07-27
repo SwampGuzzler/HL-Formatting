@@ -94,42 +94,4 @@ for row in cursor:
 
    cursor.updateRow(row)
 
-source_code = """<?xml version="1.0" encoding="UTF-8"?>
-<html xmlns:fo="http://www.w3.org/1999/XSL/Format" xmlns:msxsl="urn:schemas-microsoft-com:xslt">
-   <head />
-   <body style="margin:0px 0px 0px 0px;overflow:auto;background:#FFFFFF;">
-      <table style="font-family:Arial,Verdana,Times;font-size:12px;text-align:left;width:100%;border-collapse:collapse;padding:3px 3px 3px 3px">
-         <tr style="text-align:center;font-weight:bold;background:#9CBCE2">
-            <td>Low Income-Rational Service Area 7/Adjuntas/Arecibo/Barceloneta/Flor</td>
-         </tr>
-         <tr>
-            <td>
-               <table style="font-family:Arial,Verdana,Times;font-size:12px;text-align:left;width:100%;border-spacing:0px; padding:3px 3px 3px 3px">
-                  <tr>
-                     <td>HPSA ID</td>
-                     <td>1729997294</td>
-                  </tr>
-                  <tr bgcolor="#D4E4F3">
-                     <td>HPSA Score</td>
-                     <td>12</td>
-                  </tr>
-                  <tr>
-                     <td>Designation Type</td>
-                     <td>Hpsa Population</td>
-                  </tr>
-                  <tr bgcolor="#D4E4F3">
-                     <td>HPSA Discipline</td>
-                     <td>Primary Care</td>
-                  </tr>
-                  <tr>
-                     <td>Data As Of</td>
-                     <td>7/5/2016</td>
-                  </tr>
-               </table>
-            </td>
-         </tr>
-      </table>
-   </body>
-</html>
-"""
 

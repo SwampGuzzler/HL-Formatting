@@ -3,7 +3,7 @@
 ### Getting Started
 Before you can begin, make sure you have [pip](https://pip.pypa.io/en/stable/installing/).
 
-Install all the only dependencies: BeautifulSoup
+Install the only dependency: BeautifulSoup
 
 ```shell
 pip install bs4

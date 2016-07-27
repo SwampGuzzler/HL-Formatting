@@ -1,17 +1,34 @@
 from bs4 import BeautifulSoup
 import arcpy
+import sys
+import os
 
 # Set environment settings
 Workspace = r"D:\apps\HL-formatter"
 arcpy.env.workspace = Workspace
+arcpy.env.scratchWorkspace = r"D:\apps\HL-formatter\InputData.gdb"
 arcpy.env.overwriteOutput = True
 
-fc = "D:/apps/HL-formatter/data.gdb/Placemark_polys"
+middle_layer = 'Polygons'
+
+temp_gdb = 'Polygons.gdb'
+temp_path = os.path.join(Workspace, temp_gdb)
+outLocation = os.path.join(Workspace, 'data.gdb')
+
+input_data = os.path.join(Workspace, sys.argv[1])
+output_name =sys.argv[2]
+
+arcpy.KMLToLayer_conversion(input_data, Workspace, middle_layer)
 
 print 'Copying features to new Feature Class...'
-arcpy.CopyFeatures_management(fc, "D:/apps/HL-formatter/data.gdb/HPSA_Primary_Care")
 
-updated_fc =  "D:/apps/HL-formatter/data.gdb/HPSA_Primary_Care"
+updated_fc = os.path.join(outLocation, output_name)
+arcpy.CopyFeatures_management(os.path.join(temp_path, 'Polygons'), updated_fc)
+
+if arcpy.Exists(middle_layer):
+   arcpy.Delete_management(middle_layer)
+   arcpy.AddMessage("Deleting middle_layer")
+
 
 # Set local variables
 inFeatures = updated_fc
@@ -36,6 +53,7 @@ fieldAlias5 = "Data As Of"
 fieldType5 = "TEXT"
 
 print 'Adding new fields to the Feature Class...'
+arcpy.AddMessage("Adding new fields to the Feature Class...")
 arcpy.AddField_management(updated_fc, fieldName1, fieldType1,
                           field_alias=fieldAlias1, field_is_nullable="NULLABLE")
 
@@ -53,6 +71,7 @@ arcpy.AddField_management(updated_fc, fieldName5, fieldType5,
 
 
 print 'Updating every row and their new field with our Popupinfo value...'
+arcpy.AddMessage('Updating every row and their new field with our Popupinfo value...')
 xml_field = "Popupinfo"
 cursor = arcpy.UpdateCursor(updated_fc)
 for row in cursor:
@@ -113,24 +132,4 @@ source_code = """<?xml version="1.0" encoding="UTF-8"?>
    </body>
 </html>
 """
-# soup = BeautifulSoup(source_code)
-soup = BeautifulSoup(source_code, "html.parser")
-luke = soup.find_all("td")
 
-# rows = soup.findAll('td')[1::2]
-hpsa_id = soup.findAll('td')[3:4]
-hpsa_score = soup.findAll('td')[5:6]
-design_type = soup.findAll('td')[7:8]
-hpsa_disc = soup.findAll('td')[9:10]
-date = soup.findAll('td')[11:12]
-
-print hpsa_id[0].get_text()
-print hpsa_score[0].get_text()
-print design_type[0].get_text()
-print hpsa_disc[0].get_text()
-print date[0].get_text()
-
-# for text in luke:
-#     print text
-# print soup.td.string
-# print luke

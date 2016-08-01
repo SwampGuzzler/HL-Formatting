@@ -4,30 +4,50 @@ import sys
 import os
 
 # Set environment settings
-Workspace = r"D:\apps\HL-formatter"
-arcpy.env.workspace = Workspace
-arcpy.env.scratchWorkspace = r"D:\apps\HL-formatter\InputData.gdb"
+# Workspace = r"D:\apps\HL-formatter"
+# arcpy.env.workspace = Workspace
+# arcpy.env.scratchWorkspace = r"D:\apps\HL-formatter\InputData.gdb"
 arcpy.env.overwriteOutput = True
 
 middle_layer = 'Polygons'
 
 temp_gdb = 'Polygons.gdb'
-temp_path = os.path.join(Workspace, temp_gdb)
-outLocation = os.path.join(Workspace, 'data.gdb')
 
-input_data = os.path.join(Workspace, sys.argv[1])
-output_name =sys.argv[2]
+input_data = os.path.join(arcpy.env.workspace, sys.argv[1])
 
-arcpy.KMLToLayer_conversion(input_data, Workspace, middle_layer)
+directory = 'kmz_output'
+
+if not os.path.exists(directory):
+    os.makedirs(directory)
+
+arcpy.AddMessage(input_data)
+arcpy.AddMessage(directory)
+
+
+arcpy.KMLToLayer_conversion(input_data, directory, middle_layer)
+
+temp_path = os.path.join(os.getcwd(), directory)
+
+arcpy.AddMessage(temp_path)
+
 
 print 'Copying features to new Feature Class...'
 
-updated_fc = os.path.join(outLocation, output_name)
-arcpy.CopyFeatures_management(os.path.join(temp_path, 'Polygons'), updated_fc)
+updated_fc = sys.argv[2]
+
+arcpy.AddMessage(updated_fc)
+new_gdb = os.path.join(temp_path, 'Polygons.gdb')
+
+arcpy.AddMessage(os.path.join(new_gdb, 'Polygons'))
+arcpy.CopyFeatures_management(os.path.join(new_gdb, 'Polygons'), updated_fc)
 
 if arcpy.Exists(middle_layer):
    arcpy.Delete_management(middle_layer)
    arcpy.AddMessage("Deleting middle_layer")
+
+import shutil
+
+shutil.rmtree(directory)
 
 
 # Set local variables

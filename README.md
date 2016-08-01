@@ -12,23 +12,23 @@ pip install bs4
 Now you're ready to go!
 
 ### Instructions
-Download the appropriate 'GeographicAreas' KML file from the [HRSA Warehouse](https://datawarehouse.hrsa.gov/data/datadownload.aspx).
-###### One of 3: HPSA - Dental Health, HPSA - Mental Health, or HPSA - Primary Care
 
-Create an ArcGIS Feature Geodatabase in This Folder: 'data.gdb'
 
-Add the KML into the gdb:
-  1. Import the KML (or KMZ) file into the ArcGIS ecosystem via the [KML To Layer](http://pro.arcgis.com/en/pro-app/tool-reference/conversion/kml-to-layer.htm) GP tool, found in the Conversion Tools Toolbox.
-  2. Copy the resulting Feature Class into the database, renaming it appropriately (see what the 'fc' variable is pointing to in the correct script).
-  3. Ensure that your environmental variables are pointing to the proper paths and feature class names: Workspace, fc, updated_fc.
+To use this tool:
+  1. Download the appropriate 'GeographicAreas' KML file from the [HRSA Warehouse](https://datawarehouse.hrsa.gov/data/datadownload.aspx). --> One of 3: 'HPSA - Dental Health', 'HPSA - Mental Health', or 'HPSA - Primary Care'
+  2. Import the DataUpdate.tbx toolbox into ArcMap or ArcCatalog
+  3. Run the Parse_Popups Script, passing in the KML file as your input data and naming an appropriate output feature class.
 
-Run the appropriate python tool (watch for schema locks!), and inspect the resulting Feature Class for the new fields and values.
+###### If Arc Desktop isn't your thing, you can also:
+
+Run the python script (watch for schema locks!), and inspect the resulting Feature Class for the new fields and values.
 
 ```shell
-python parse.py
+python parse.py <pathToYourKML> <pathToANewFeatureClass>
 ```
+
+*Make sure that feature class param lives in a real .gdb, we are deleting our intermediate data and gdb at the end of the script.
 
 To-Do:
   >1. Unittests: for missing data, for range out of bounds, for different user parameters
   >2. Dynamicize the soup's findAll functions. It won't always be the same td elements we grab...I don't think.
-  >3. Either require a gdb to work in, create one then delete it, or use some dynamic scratch workspace so the user doesn't need to a hard-coded out gdb.

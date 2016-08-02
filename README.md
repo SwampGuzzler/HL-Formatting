@@ -33,6 +33,12 @@ Run the python script (watch for schema locks!), and inspect the resulting Featu
 python parse.py <pathToYourKML> <pathToANewFeatureClass>
 ```
 
+example:
+
+```shell
+python parse.py HPSA_Dental_Health.kmz C:/Users/lcotner/Documents/ArcGIS/Default.gdb/HPSA_Dental_Health_parse1
+```
+
 *Make sure that feature class param lives in a real .gdb, we are deleting our intermediate data and gdb at the end of the script.
 
 To-Do:

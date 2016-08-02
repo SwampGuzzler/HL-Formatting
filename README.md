@@ -3,7 +3,12 @@
 ### Getting Started
 Before you can begin, make sure you have [pip](https://pip.pypa.io/en/stable/installing/).
 
-Install the only dependency: BeautifulSoup
+You can also run the included <strong>get-pip.py</strong> file:
+```shell
+python get-pip.py
+```
+
+With pip confirmed, install the only dependency: BeautifulSoup
 
 ```shell
 pip install bs4
@@ -17,7 +22,8 @@ Now you're ready to go!
 To use this tool:
   1. Download the appropriate 'GeographicAreas' KML file from the [HRSA Warehouse](https://datawarehouse.hrsa.gov/data/datadownload.aspx). --> One of 3: 'HPSA - Dental Health', 'HPSA - Mental Health', or 'HPSA - Primary Care'
   2. Import the DataUpdate.tbx toolbox into ArcMap or ArcCatalog
-  3. Run the Parse_Popups Script, passing in the KML file as your input data and naming an appropriate output feature class.
+  3. Right click on the Parse_Popups script, and select 'Properties'. Go to the 'Source' tab, and point the script file's source to the 'parse.py' file in this repo.
+  4. Run the Parse_Popups Script, passing in the KML file as your input data and naming an appropriate output feature class.
 
 ###### If Arc Desktop isn't your thing, you can also:
 

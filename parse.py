@@ -13,7 +13,17 @@ middle_layer = 'Polygons'
 
 temp_gdb = 'Polygons.gdb'
 
+print arcpy.env.workspace
+arcpy.AddMessage(arcpy.env.workspace)
+
+if not arcpy.env.workspace:
+  print 'none'
+  arcpy.AddMessage('none')
+  arcpy.env.workspace = os.getcwd()
+
 input_data = os.path.join(arcpy.env.workspace, sys.argv[1])
+
+print input_data
 
 directory = 'kmz_output'
 
@@ -72,7 +82,6 @@ fieldName5 = "date"
 fieldAlias5 = "Data As Of"
 fieldType5 = "TEXT"
 
-print 'Adding new fields to the Feature Class...'
 arcpy.AddMessage("Adding new fields to the Feature Class...")
 arcpy.AddField_management(updated_fc, fieldName1, fieldType1,
                           field_alias=fieldAlias1, field_is_nullable="NULLABLE")
